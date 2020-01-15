@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 /**
  * @author : hu
@@ -33,17 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void click1(View view) {
-        TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+        TinkerManager.loadPatch(Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
 
     }
 
     public void click2(View view) {
 
         Toast.makeText(this, "？？？", Toast.LENGTH_SHORT).show();
+
     }
-
-
-
 
     //检查是否有权限
     private boolean checkPermissions(String[] neededPermissions) {
@@ -55,5 +52,9 @@ public class MainActivity extends AppCompatActivity {
             allGranted &= ContextCompat.checkSelfPermission(this, neededPermission) == PackageManager.PERMISSION_GRANTED;
         }
         return allGranted;
+    }
+
+    public void killSelf(View view) {
+        TinkerManager.killSelf();
     }
 }

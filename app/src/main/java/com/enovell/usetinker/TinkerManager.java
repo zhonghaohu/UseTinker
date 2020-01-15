@@ -6,6 +6,7 @@ import com.tencent.tinker.lib.patch.UpgradePatch;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.ApplicationLike;
+import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 
 /**
  * @author : hu
@@ -51,6 +52,11 @@ public class TinkerManager {
         if (mApplicationLike != null)
             return mApplicationLike.getApplication().getApplicationContext();
         return null;
+    }
+
+    public static void killSelf(){
+        ShareTinkerInternals.killAllOtherProcess(getApplicationContext());
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
 }
